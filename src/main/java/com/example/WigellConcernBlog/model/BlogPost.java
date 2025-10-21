@@ -1,6 +1,7 @@
 package com.example.WigellConcernBlog.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "blogpost")
@@ -9,19 +10,20 @@ public class BlogPost {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long blogPostId;
 
+    @NotNull
     private String title;
+
+    @NotNull
     private String content;
 
-    @ManyToOne
-    @JoinColumn(name = "author_id", nullable = false)
-    private User author;
+    private String keycloakId;
 
     public BlogPost() {}
 
-    public BlogPost(String title, String content, User author) {
+    public BlogPost(String title, String content, String keycloakId) {
         this.title = title;
         this.content = content;
-        this.author = author;
+        this.keycloakId = keycloakId;
     }
 
     public long getBlogPostId() {
@@ -48,11 +50,11 @@ public class BlogPost {
         this.content = content;
     }
 
-    public User getAuthor() {
-        return author;
+    public String getKeycloakId() {
+        return keycloakId;
     }
 
-    public void setAuthor(User author) {
-        this.author = author;
+    public void setKeycloakId(String keycloakId) {
+        this.keycloakId = keycloakId;
     }
 }
